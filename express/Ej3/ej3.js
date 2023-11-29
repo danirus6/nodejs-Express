@@ -49,34 +49,40 @@ app.post('/products/new', (req, res) =>{
 });
 //PUT
 app.put('/products/:id', (req, res) => {
-    const found = products.some((product) => product.id === req.params.id);
+    const productId = parseInt(req.params.id, 10); // Convierte a número
 
-    if(found){
+    const found = products.some((product) => product.id === productId);
+
+    if (found) {
         products.forEach(product => {
-            if(product.id === req.params.id){
+            if (product.id === productId) {
                 product.nombre = req.body.nombre ? req.body.nombre : product.nombre;
                 product.precio = req.body.precio ? req.body.precio : product.precio;
                 res.send(product);
-            }          
+            }
         });
-    } else{
-        res.status(404).send('error');
+    } else {
+        res.status(404).send('Error: Producto no encontrado');
     }
 });
 
-//DELETE
-app.delete('/products/:id',(res,req) => {
-    const found = products.some((product)=> product.id == req.params.id);
 
-    if(found){
-        const deleteItem = products.filter((product) => product.id != req.params.id);
+// DELETE
+app.delete('/products/id/:id', (req, res) => {
+    const productId = parseInt(req.params.id, 10); // Convierte a número
+
+    const found = products.some((product) => product.id === productId);
+
+    if (found) {
+        const deleteItem = products.filter((product) => product.id !== productId);
         res.status(202).send(deleteItem);
-    }else{
+    } else {
         res.status(404).send({
-            message: 'no existe'
-        })
+            message: 'No existe el producto con el ID proporcionado'
+        });
     }
 });
+
 
 app.get('/products/filter/price', (req, res) => {
   const { min, max } = req.query;
