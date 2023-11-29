@@ -23,21 +23,19 @@ const products = [
         id: 6, nombre: 'Taza de Star Wars' , precio: 220
     }
   ];
-
   app.use(express.json());
-  app.get('/products', (res,req) =>{
-    res.json({
-        description: 'Productos',
-        items: products
-    });
-  });
+
+  app.get('/products', (req, res) => {
+    res.status(200).send({ message: 'todo ok', result: products })
+})
+
 //POST
-app.post('/products', (res,req) =>{
+app.post('/products/new', (req, res) =>{
     const {nombre, precio} = req.body;
     const newProduct = {
         id: products.length +1,
         nombre,
-        precio,
+        precio
     }
     if(!nombre || !precio)
     res.status(400).send('Ingresa los datos correctamente');
