@@ -6,5 +6,4 @@ const app = express();
 app.listen(PUERTO, () => {
 
     console.log(`Servidor levantado en el puerto ${PUERTO}`);
-
 });
