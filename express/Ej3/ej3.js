@@ -48,13 +48,13 @@ app.post('/products/new', (req, res) =>{
     }
 });
 //PUT
-app.put('products/:id', (req, res) => {
+app.put('/products/:id', (req, res) => {
     const found = products.some((product) => product.id === req.params.id);
 
     if(found){
         products.forEach(product => {
             if(product.id === req.params.id){
-                product.name = req.body.name ? req.body.name : product.name;
+                product.nombre = req.body.nombre ? req.body.nombre : product.nombre;
                 product.precio = req.body.precio ? req.body.precio : product.precio;
                 res.send(product);
             }          
