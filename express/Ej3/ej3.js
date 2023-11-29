@@ -21,6 +21,9 @@ const products = [
     },
     {  
         id: 6, nombre: 'Taza de Star Wars' , precio: 220
+    },
+    {  
+        id: 7, nombre: 'Test' , precio: 220
     }
   ];
   app.use(express.json());
